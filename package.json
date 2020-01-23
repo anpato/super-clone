@@ -1,14 +1,15 @@
 {
   "name": "super-cloner",
-  "version": "1.0.5",
+  "version": "1.0.2",
   "author": "Andre Pato",
   "main": "./bin/app.js",
+  "allow-same-version": true,
   "license": "MIT",
   "preferGlobal": true,
   "repository": "https://github.com/anpato/super-cloner",
   "types": "./bin/app.d.ts",
   "bin": {
-    "super-cloner": "./app.js"
+    "super-cloner": "./bin/app.js"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -20,7 +21,7 @@
     "tspath": "^1.3.7"
   },
   "files": [
-    "lib/**/*"
+    "bin/**/*"
   ],
   "scripts": {
     "clean": "rm -rf bin",
