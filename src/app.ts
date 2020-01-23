@@ -53,10 +53,10 @@ const prompts: object[] = [
 
 const Inquirer = new InquirerController(inquirer.prompt, prompts)
 commander.version('1.0.0').description('Super Cloner')
-commander
-  .command('start')
-  .alias('-s')
-  .description('Start Super Cloner')
-  .action(() => Inquirer.initializePrompt())
-
+// commander
+//   .command('start')
+//   .alias('-s')
+//   .description('Start Super Cloner')
+//   .action(() => )
+Inquirer.initializePrompt()
 commander.parse(process.argv)
