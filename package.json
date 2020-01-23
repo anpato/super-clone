@@ -14,9 +14,9 @@
     "rxjs": "^6.5.4"
   },
   "scripts": {
-    "clean": "rm -rf dist",
+    "clean": "rm -rf bin",
     "build": "tsc ",
-    "start": "yarn clean && yarn build && node ./dist/index.js"
+    "start": "yarn clean && yarn build && node ./bin/index.js"
   },
   "devDependencies": {
     "typescript": "^3.7.5"
