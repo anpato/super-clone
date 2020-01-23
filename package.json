@@ -1,6 +1,6 @@
 {
   "name": "super-cloner",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Andre Pato",
   "main": "./bin/index.js",
   "license": "MIT",
@@ -10,9 +10,6 @@
     "super-cloner": "./bin/index.js"
   },
   "dependencies": {
-    "@types/commander": "^2.12.2",
-    "@types/inquirer": "^6.5.0",
-    "@types/node": "^13.1.8",
     "axios": "^0.19.2",
     "chalk": "^3.0.0",
     "commander": "^4.1.0",
@@ -30,6 +27,8 @@
     "prepublishOnly": "yarn clean && yarn build"
   },
   "devDependencies": {
+    "@types/inquirer": "^6.5.0",
+    "@types/node": "^13.5.0",
     "typescript": "^3.7.5"
   },
   "keywords": [

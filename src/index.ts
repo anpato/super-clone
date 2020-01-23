@@ -3,7 +3,7 @@ import inquirer = require('inquirer')
 import commander = require('commander')
 import * as interfaces from './middleware/interfaces'
 import chalk = require('chalk')
-const { InquirerController } = require('./controllers/InquirerController')
+import { InquirerController } from './controllers/InquirerController'
 
 const url: string = 'https://git.generalassemb.ly/settings/tokens'
 

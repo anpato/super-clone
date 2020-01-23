@@ -4,7 +4,7 @@ import { exec } from 'child_process'
 import Axios from 'axios'
 import { GITHUB_TOKEN, GITHUB_USERNAME } from '../env'
 import chalk from 'chalk'
-export class InquirerController {
+class InquirerController {
   private exec: any
   constructor(private prompt: any, private prompts: object[]) {
     this.prompt = prompt
@@ -72,3 +72,5 @@ export class InquirerController {
     }
   }
 }
+
+export { InquirerController }
