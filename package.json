@@ -1,5 +1,5 @@
 {
-  "name": "cloner",
+  "name": "super-cloner",
   "version": "1.0.0",
   "author": "Andre Pato",
   "main": "./bin/index.js",
