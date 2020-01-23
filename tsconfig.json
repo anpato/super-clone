@@ -1,11 +1,14 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "moduleResolution": "node",
+    // "moduleResolution": "node",
     "module": "commonjs",
     "declaration": true,
+
     "outDir": "./bin",
-    "strict": true
+    "strict": true,
+    "lib": ["ES2015"],
+    "esModuleInterop": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "**/__tests__/*"]

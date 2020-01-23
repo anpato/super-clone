@@ -1,13 +1,15 @@
+#!/usr/bin/env node
 import { prompt } from 'inquirer'
+import commander from 'commander'
 import InquirerController from './controllers/InquirerController'
 import * as interfaces from './middleware/interfaces'
-import * as chalk from 'chalk'
+import chalk from 'chalk'
 
-const url = new URL('https://git.generalassemb.ly/settings/tokens')
+const url: string = 'https://git.generalassemb.ly/settings/tokens'
 
 const initialPrompt: interfaces.Prompt = {
   name: 'initialize',
-  message: `Hey there, welcome to Super Clone for General Assembly! To get started visit ${chalk.green(
+  message: `Hey there, welcome to Super Clone for General Assembly! To get started visit ${chalk.greenBright(
     url
   )} to create a new Github Personal Access Token. For instructions on how to create a new personal access token, view the Getting Started section in the documentation! Press enter/return once completed.`
 }
@@ -51,4 +53,11 @@ const prompts: object[] = [
 ]
 
 const Inquirer = new InquirerController(prompt, prompts)
-Inquirer.intializePrompt()
+commander.version('1.0.0').description('Super Cloner')
+commander
+  .command('start')
+  .alias('-s')
+  .description('Start Super Cloner')
+  .action(() => Inquirer.intializePrompt())
+
+commander.parse(process.argv)

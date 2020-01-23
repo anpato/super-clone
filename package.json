@@ -1,8 +1,13 @@
 {
   "name": "cloner",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "./bin/index.js",
   "license": "MIT",
+  "preferGlobal": true,
+  "types": "./bin/index.d.ts",
+  "bin": {
+    "super-cloner": "./bin/index.js"
+  },
   "dependencies": {
     "@types/commander": "^2.12.2",
     "@types/inquirer": "^6.5.0",
@@ -13,10 +18,14 @@
     "inquirer": "^7.0.3",
     "rxjs": "^6.5.4"
   },
+  "files": [
+    "lib/**/*"
+  ],
   "scripts": {
     "clean": "rm -rf bin",
     "build": "tsc ",
-    "start": "yarn clean && yarn build && node ./bin/index.js"
+    "start": "yarn clean && yarn build && node ./bin/index.js",
+    "prepublishOnly": "yarn clean && yarn build"
   },
   "devDependencies": {
     "typescript": "^3.7.5"
