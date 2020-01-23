@@ -1,6 +1,6 @@
 {
-  "name": "super-clone",
-  "version": "1.0.1",
+  "name": "@anpato/super-clone",
+  "version": "1.0.0",
   "author": "Andre Pato",
   "main": "./bin/app.js",
   "allow-same-version": true,
@@ -25,7 +25,7 @@
   ],
   "scripts": {
     "clean": "rm -rf bin",
-    "build": "tsc --traceResolution",
+    "build": "tsc",
     "start": "yarn clean && yarn build && node ./bin/index.js",
     "prepublishOnly": "yarn clean && yarn build"
   },
