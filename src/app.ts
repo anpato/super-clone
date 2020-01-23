@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import inquirer from 'inquirer'
-const commander: any = require('commander')
-const chalk: any = require('chalk')
+import commander from 'commander'
+import chalk = require('chalk')
 import * as interfaces from './middleware/interfaces'
 import InquirerController from './controllers/InquirerController'
 const url: string = 'https://git.generalassemb.ly/settings/tokens'

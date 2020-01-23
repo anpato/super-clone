@@ -1,18 +1,16 @@
 {
   "name": "super-cloner",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "author": "Andre Pato",
-  "main": "./bin/index.js",
+  "main": "./bin/app.js",
   "license": "MIT",
   "preferGlobal": true,
   "repository": "https://github.com/anpato/super-cloner",
   "types": "./bin/app.d.ts",
   "bin": {
-    "super-cloner": "./bin/app.js"
+    "super-cloner": "./app.js"
   },
   "dependencies": {
-    "@types/inquirer": "^6.5.0",
-    "@types/node": "^13.5.0",
     "axios": "^0.19.2",
     "chalk": "^3.0.0",
     "commander": "^4.1.0",
@@ -26,12 +24,14 @@
   ],
   "scripts": {
     "clean": "rm -rf bin",
-    "build": "tsc ",
+    "build": "tsc --traceResolution",
     "start": "yarn clean && yarn build && node ./bin/index.js",
     "prepublishOnly": "yarn clean && yarn build"
   },
   "devDependencies": {
-    "typescript": "^3.7.5"
+    "typescript": "^3.7.5",
+    "@types/inquirer": "^6.5.0",
+    "@types/node": "^13.5.0"
   },
   "keywords": [
     "git",
