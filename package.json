@@ -1,6 +1,6 @@
 {
   "name": "super-cloner",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Andre Pato",
   "main": "./bin/index.js",
   "license": "MIT",
@@ -12,6 +12,7 @@
   "dependencies": {
     "@types/commander": "^2.12.2",
     "@types/inquirer": "^6.5.0",
+    "@types/node": "^13.1.8",
     "axios": "^0.19.2",
     "chalk": "^3.0.0",
     "commander": "^4.1.0",

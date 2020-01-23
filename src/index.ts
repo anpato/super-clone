@@ -1,9 +1,9 @@
 #!/usr/bin/env node
-import { prompt } from 'inquirer'
-import commander from 'commander'
-import InquirerController from './controllers/InquirerController'
+import inquirer = require('inquirer')
+import commander = require('commander')
 import * as interfaces from './middleware/interfaces'
-import chalk from 'chalk'
+import chalk = require('chalk')
+const { InquirerController } = require('./controllers/InquirerController')
 
 const url: string = 'https://git.generalassemb.ly/settings/tokens'
 
@@ -52,7 +52,7 @@ const prompts: object[] = [
   //   typeOfCourse
 ]
 
-const Inquirer = new InquirerController(prompt, prompts)
+const Inquirer = new InquirerController(inquirer.prompt, prompts)
 commander.version('1.0.0').description('Super Cloner')
 commander
   .command('start')

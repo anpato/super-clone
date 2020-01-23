@@ -7,7 +7,7 @@
 
     "outDir": "./bin",
     "strict": true,
-    "lib": ["ES2015"],
+    "lib": ["ES2015", "dom"],
     "esModuleInterop": true
   },
   "include": ["src"],
