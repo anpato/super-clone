@@ -1,18 +1,15 @@
-// import commander from 'commander'
 import { prompt } from 'inquirer'
+import InquirerController from './controllers/InquirerController'
+import * as interfaces from './middleware/interfaces'
 
-interface Prompt {
-  name: string
-  message: string
-}
-
-const initialPrompt: Prompt = {
+const initialPrompt: interfaces.Prompt = {
   name: 'initialize',
   message: 'Hey there, welcome to Super Clone!'
 }
-const getInfoPrompt: Prompt = {
+const getInfoPrompt: interfaces.Prompt = {
   name: 'token',
   message: 'Enter your oauth token'
 }
 
-prompt(initialPrompt).then((answers: object) => console.log(answers))
+const Inquirer = new InquirerController(prompt, [initialPrompt, getInfoPrompt])
+Inquirer.intializePrompt()
