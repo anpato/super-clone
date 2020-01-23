@@ -1,10 +1,10 @@
 import { writeFile, mkdir } from 'fs'
 import { promisify } from 'util'
 import { exec } from 'child_process'
-import Axios from 'axios'
-import { GITHUB_TOKEN, GITHUB_USERNAME } from '../env'
-import chalk from 'chalk'
-class InquirerController {
+const Axios: any = require('axios')
+import { GITHUB_TOKEN, GITHUB_USERNAME } from '../env/env'
+const chalk: any = require('chalk')
+export class InquirerController {
   private exec: any
   constructor(private prompt: any, private prompts: object[]) {
     this.prompt = prompt
@@ -16,7 +16,7 @@ class InquirerController {
     writeFile(
       `${process.cwd()}/./.env`,
       `GITHUB_TOKEN=${token} \n GITHUB_USERNAME=${username}`,
-      async err => {
+      async (err: any) => {
         if (err) throw err
         await this.fetchRepos(token, username)
       }
@@ -57,12 +57,12 @@ class InquirerController {
   }
 
   private createRepoFolder = async () => {
-    mkdir(`${process.cwd()}/./repos`, async err => {
+    mkdir(`${process.cwd()}/./repos`, async (err: any) => {
       if (err) return
     })
   }
 
-  public intializePrompt = async () => {
+  public initializePrompt = async () => {
     if (!GITHUB_TOKEN && !GITHUB_USERNAME) {
       const answers = await this.prompt(this.prompts)
       const { token, username } = answers
@@ -72,5 +72,3 @@ class InquirerController {
     }
   }
 }
-
-export { InquirerController }

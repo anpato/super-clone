@@ -1,10 +1,9 @@
 #!/usr/bin/env node
-import inquirer = require('inquirer')
-import commander = require('commander')
+import inquirer from 'inquirer'
+const commander: any = require('commander')
+const chalk: any = require('chalk')
 import * as interfaces from './middleware/interfaces'
-import chalk = require('chalk')
-import { InquirerController } from './controllers/InquirerController'
-
+import * as controller from './controllers/InquirerController'
 const url: string = 'https://git.generalassemb.ly/settings/tokens'
 
 const initialPrompt: interfaces.Prompt = {
@@ -19,7 +18,7 @@ const getTokenPrompt: interfaces.Prompt = {
 }
 const getUsername: interfaces.Prompt = {
   name: 'username',
-  message: "Whats's your github username?"
+  message: "What's your github username?"
 }
 
 const selectReposToClone: interfaces.Prompt = {
@@ -52,12 +51,12 @@ const prompts: object[] = [
   //   typeOfCourse
 ]
 
-const Inquirer = new InquirerController(inquirer.prompt, prompts)
+const Inquirer = new controller.InquirerController(inquirer.prompt, prompts)
 commander.version('1.0.0').description('Super Cloner')
 commander
   .command('start')
   .alias('-s')
   .description('Start Super Cloner')
-  .action(() => Inquirer.intializePrompt())
+  .action(() => Inquirer.initializePrompt())
 
 commander.parse(process.argv)
