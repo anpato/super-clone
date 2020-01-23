@@ -5,6 +5,10 @@
     "sourceMap": true,
     "declaration": true,
     "outDir": "./bin",
+    "baseUrl": ".",
+    "paths": {
+      "*": ["*", "src/*"]
+    },
     "strict": true,
     "esModuleInterop": true,
     "moduleResolution": "node"

@@ -3,7 +3,7 @@ import inquirer from 'inquirer'
 const commander: any = require('commander')
 const chalk: any = require('chalk')
 import * as interfaces from './middleware/interfaces'
-import * as controller from './controllers/InquirerController'
+import InquirerController from './controllers/InquirerController'
 const url: string = 'https://git.generalassemb.ly/settings/tokens'
 
 const initialPrompt: interfaces.Prompt = {
@@ -51,7 +51,7 @@ const prompts: object[] = [
   //   typeOfCourse
 ]
 
-const Inquirer = new controller.InquirerController(inquirer.prompt, prompts)
+const Inquirer = new InquirerController(inquirer.prompt, prompts)
 commander.version('1.0.0').description('Super Cloner')
 commander
   .command('start')
