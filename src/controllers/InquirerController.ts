@@ -4,6 +4,7 @@ const Axios: any = require('axios')
 import { GITHUB_TOKEN, GITHUB_USERNAME } from '../env/env'
 import Stack from '../tools/Stack'
 const chalk: any = require('chalk')
+const Ora: any = require('ora')
 export default class InquirerController {
   private exec: any
   constructor(private prompt: any, private prompts: object[]) {
@@ -17,29 +18,65 @@ export default class InquirerController {
       `GITHUB_TOKEN=${token} \n GITHUB_USERNAME=${username}`,
       async (err: any) => {
         if (err) throw err
-        await this.fetchRepos(token, username)
+        const repos = await this.fetchRepos(token, username)
+        await this.cloneRepos(repos)
       }
     )
   }
 
   private fetchRepos = async (token: string, username: string) => {
     try {
-      console.info(chalk.green('Fetching your repos'))
-      const resp = await Axios.get(
-        `https://git.generalassemb.ly/api/v3/user/repos?page=1&per_page=50&visibility=all`,
+      const throbber = Ora(chalk.green('Fetching your repos.')).start()
+      let page: number = 1
+      let repos: any[] = []
+      const initial = await Axios.get(
+        `https://git.generalassemb.ly/api/v3/user/repos?page=1&per_page=100&visibility=all`,
         {
           headers: {
             Authorization: `token ${token}`
           }
         }
       )
-      console.log(resp.data, resp.data.length)
-      // await this.createRepoFolder()
-      // const stack = new Stack(resp.data)
-      // await stack.executeEachItem()
+      await this.createRepoFolder()
+      const maxPage = this.parseHeaders(initial.headers.link)
+      for (page; page <= maxPage; page++) {
+        const resp = await Axios.get(
+          `https://git.generalassemb.ly/api/v3/users/${username}/repos?page=${page}&per_page=100&visibility=all`,
+          {
+            headers: {
+              Authorization: `token ${token}`
+            }
+          }
+        )
+
+        repos.push(...resp.data)
+      }
+      throbber.stopAndPersist({
+        text: 'Finished fetching repos.'
+      })
+      return repos
     } catch (error) {
       throw error
     }
+  }
+
+  private cloneRepos = async (repos: any[]) => {
+    const throbber = Ora(chalk.green('Cloning your repos.')).start()
+    const stack = new Stack(repos)
+    stack.executeEachItem()
+    throbber.stopAndPersist({
+      text: 'Finished cloning repos.'
+    })
+  }
+
+  private parseHeaders = (headers: any) => {
+    const arrayOfHeaders = headers.split(',')
+    let lastPageHeader: any = arrayOfHeaders.filter((header: string) => {
+      if (header.includes('rel="last"')) {
+        return header.toString()
+      }
+    })
+    return parseInt(lastPageHeader[0].split('page')[1].replace(/[=&per_]/g, ''))
   }
 
   private createRepoFolder = async () => {
@@ -49,12 +86,16 @@ export default class InquirerController {
   }
 
   public initializePrompt = async () => {
-    // if (!GITHUB_TOKEN && !GITHUB_USERNAME) {
-    //   const answers = await this.prompt(this.prompts)
-    //   const { token, username } = answers
-    //   this.writeTokenToEnv(token, username)
-    // } else {
-    await this.fetchRepos(GITHUB_TOKEN || '', GITHUB_USERNAME || '')
-    // }
+    if (!GITHUB_TOKEN && !GITHUB_USERNAME) {
+      const answers = await this.prompt(this.prompts)
+      const { token, username } = answers
+      this.writeTokenToEnv(token, username)
+    } else {
+      const repos = await this.fetchRepos(
+        GITHUB_TOKEN || '',
+        GITHUB_USERNAME || ''
+      )
+      await this.cloneRepos(repos)
+    }
   }
 }

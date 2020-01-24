@@ -21,11 +21,8 @@ export default class Stack {
   }
 
   public async executeEachItem() {
-    let incrementor: number = 0
-    while (this.getNext(incrementor)) {
-      const { name, clone_url } = this.getCurrentIndex(incrementor)
-      await Clone({ name, cloneUrl: clone_url }, this.execute)
-      incrementor++
-    }
+    this.stack.forEach(async item => {
+      await Clone({ name: item.name, cloneUrl: item.clone_url }, this.execute)
+    })
   }
 }
