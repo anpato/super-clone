@@ -23,50 +23,23 @@ export default class InquirerController {
   }
 
   private fetchRepos = async (token: string, username: string) => {
-    // try {
-    console.info(chalk.green('Fetching your repos'))
-    // const resp = await Axios.get(
-    //   `https://git.generalassemb.ly/api/v3/users/${username}/repos?per_page=300`,
-    //   {
-    //     headers: {
-    //       Authorization: `token ${token}`
-    //     }
-    //   }
-    // )
-
-    const data: any[] = [
-      { id: 1, name: 'test' },
-      {
-        id: 2,
-        name: 'testing'
-      },
-      { id: 3 },
-      { id: 4 },
-      { id: 5 },
-      { id: 6 }
-    ]
-    const stack = new Stack(data)
-    stack.executeEachItem()
-    // await this.createRepoFolder()
-    // await this.cloneRepos(resp.data)
-    // } catch (error) {
-    //   throw error
-    // }
-  }
-
-  private cloneRepos = async (repos: any[]) => {
-    console.info(chalk.green('Cloning Repos'))
-    let incrementor: number = repos.length
-    repos.forEach(async (repo: any) => {
-      await this.exec(
-        `cd ./repos && git clone ${repo.clone_url}`,
-        (err: any) => {
-          if (err) return
-          incrementor--
+    try {
+      console.info(chalk.green('Fetching your repos'))
+      const resp = await Axios.get(
+        `https://git.generalassemb.ly/api/v3/user/repos?page=1&per_page=50&visibility=all`,
+        {
+          headers: {
+            Authorization: `token ${token}`
+          }
         }
       )
-    })
-    console.info(chalk.green('Repos cloned'))
+      console.log(resp.data, resp.data.length)
+      // await this.createRepoFolder()
+      // const stack = new Stack(resp.data)
+      // await stack.executeEachItem()
+    } catch (error) {
+      throw error
+    }
   }
 
   private createRepoFolder = async () => {

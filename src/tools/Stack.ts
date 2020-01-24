@@ -1,5 +1,6 @@
 import { promisify } from 'util'
 import { exec } from 'child_process'
+import { Clone } from './Clone'
 
 export default class Stack {
   private next: any
@@ -22,7 +23,8 @@ export default class Stack {
   public async executeEachItem() {
     let incrementor: number = 0
     while (this.getNext(incrementor)) {
-      this.getCurrentIndex(incrementor)
+      const { name, clone_url } = this.getCurrentIndex(incrementor)
+      await Clone({ name, cloneUrl: clone_url }, this.execute)
       incrementor++
     }
   }

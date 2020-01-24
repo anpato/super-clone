@@ -4,3 +4,8 @@ export interface Prompt {
   message: string
   choices?: string[]
 }
+
+export interface RepoParams {
+  name?: string
+  cloneUrl: string
+}
