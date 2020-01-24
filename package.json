@@ -1,6 +1,6 @@
 {
   "name": "@anpato/super-clone",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Andre Pato",
   "main": "./bin/app.js",
   "allow-same-version": true,
@@ -9,7 +9,7 @@
   "repository": "https://github.com/anpato/super-cloner",
   "types": "./bin/app.d.ts",
   "bin": {
-    "super-cloner": "./bin/app.js"
+    "super-clone": "./bin/app.js"
   },
   "dependencies": {
     "axios": "^0.19.2",
