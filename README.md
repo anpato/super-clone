@@ -2,6 +2,10 @@
 
 ## Getting Started
 
+Navigate to your account settings by clicking on your profile image and clicking on settings.
+
+Click on developer settings and then public access tokens.
+
 Create a github public access token [here](https://git.generalassemb.ly/settings/tokens).
 
 **Keep this in a safe place!**
