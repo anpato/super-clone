@@ -16,7 +16,7 @@ When creating the public access token, make sure to enable repo access:
 
 Once the token is created, do not navigate away from the list of tokens or you won't be able to see the token again.
 
-Now you can run `npx super-clone start` and follow the prompts.
+Now you can run `npx @anpato/super-clone start` and follow the prompts.
 
 `Super Clone` will create a `repos` folder in the current directory you are working in and clone all repos into the `repos` folder.
 

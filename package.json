@@ -1,6 +1,6 @@
 {
   "name": "@anpato/super-clone",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "author": "Andre Pato",
   "main": "./bin/app.js",
   "allow-same-version": true,

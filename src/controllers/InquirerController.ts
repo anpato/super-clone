@@ -1,12 +1,10 @@
 import { writeFile, mkdir } from 'fs'
-
 const Axios: any = require('axios')
 import { GITHUB_TOKEN, GITHUB_USERNAME } from '../env/env'
 import Stack from '../tools/Stack'
 const chalk: any = require('chalk')
 const Ora: any = require('ora')
 export default class InquirerController {
-  private exec: any
   constructor(private prompt: any, private prompts: object[]) {
     this.prompt = prompt
     this.prompts = prompts
@@ -25,8 +23,8 @@ export default class InquirerController {
   }
 
   private fetchRepos = async (token: string, username: string) => {
+    const throbber = Ora(chalk.green('Fetching your repos.')).start()
     try {
-      const throbber = Ora(chalk.green('Fetching your repos.')).start()
       let page: number = 1
       let repos: any[] = []
       const initial = await Axios.get(
@@ -39,7 +37,7 @@ export default class InquirerController {
       )
       await this.createRepoFolder()
       const maxPage = this.parseHeaders(initial.headers.link)
-      for (page; page <= maxPage; page++) {
+      while (page < maxPage) {
         const resp = await Axios.get(
           `https://git.generalassemb.ly/api/v3/users/${username}/repos?page=${page}&per_page=100&visibility=all`,
           {
@@ -48,15 +46,17 @@ export default class InquirerController {
             }
           }
         )
-
         repos.push(...resp.data)
+        page++
       }
-      throbber.stopAndPersist({
-        text: 'Finished fetching repos.'
-      })
+
       return repos
     } catch (error) {
       throw error
+    } finally {
+      throbber.stopAndPersist({
+        text: 'Finished fetching repos.'
+      })
     }
   }
 
