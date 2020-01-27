@@ -21,8 +21,9 @@ export default class Stack {
   }
 
   public async executeEachItem() {
-    this.stack.forEach(async item => {
-      await Clone({ name: item.name, cloneUrl: item.clone_url }, this.execute)
-    })
+    this.stack.reduce(async (Promise, repo) => {
+      await Clone({ name: repo.name, cloneUrl: repo.clone_url }, this.execute)
+      return Promise
+    }, Promise.resolve(Promise))
   }
 }

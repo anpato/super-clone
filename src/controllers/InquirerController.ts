@@ -26,7 +26,7 @@ export default class InquirerController {
     const throbber = Ora(chalk.green('Fetching your repos.')).start()
     try {
       let page: number = 1
-      let repos: any[] = []
+      let repos: object[] = []
       const initial = await Axios.get(
         `https://git.generalassemb.ly/api/v3/user/repos?page=1&per_page=100&visibility=all`,
         {
@@ -49,7 +49,6 @@ export default class InquirerController {
         repos.push(...resp.data)
         page++
       }
-
       return repos
     } catch (error) {
       throw error
